@@ -7,11 +7,7 @@ replicaCount: 1
 image:
   repository: registry-192.168.1.38.nip.io/homebridge
   tag: latest
-  pullPolicy: IfNotPresent
-  # imagePullSecretEnabled: true
-  # imagePullSecret: registry-local
-  # insecure_registries:
-  #   - registry-192.168.1.38.nip.io
+  pullPolicy: Always
 
 persistence:
   accessMode: 'ReadWriteMany'

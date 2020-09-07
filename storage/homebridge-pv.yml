@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: homebridge-pv
+  labels:
+    nfs: homebridge
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: slow
+  mountOptions:
+    - nfsvers=3
+  nfs:
+    path: /media/pi/Elements/k8sNFS/homebridge/
+    server: 192.168.1.91
