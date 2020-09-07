@@ -1,0 +1,17 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ template "homebridge.fullname" . }}-homekit
+#   labels:
+# {{ include "homebridge.labels" . | indent 4 }}
+# spec:
+#   type: {{ .Values.homekitService.type }}
+#   ports:
+#     - port: {{ .Values.homekitService.port }}
+#       targetPort:  {{ .Values.homekitService.port }}
+#       nodePort:  {{ .Values.homekitService.port }}
+#       protocol: TCP
+#       name: homekit-http
+#   selector:
+#     app.kubernetes.io/name: {{ include "homebridge.name" . }}
+#     app.kubernetes.io/instance: {{ .Release.Name }}

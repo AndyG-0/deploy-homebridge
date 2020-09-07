@@ -1,0 +1,67 @@
+# Default values for homebridge.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: registry-192.168.1.38.nip.io/homebridge
+  tag: latest
+  pullPolicy: IfNotPresent
+  # imagePullSecretEnabled: true
+  # imagePullSecret: registry-local
+  # insecure_registries:
+  #   - registry-192.168.1.38.nip.io
+
+persistence:
+  accessMode: 'ReadWriteMany'
+  enabled: true
+  size: 1Gi
+  storageClass: 'slow'
+  existingClaim: homebridge-pvc
+
+nameOverride: ""
+fullnameOverride: ""
+
+webService:
+  type: ClusterIP
+  port: 8080
+
+homekitService:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  loadBalancerIP: "192.168.1.92"
+  port: 51826
+
+ingress:
+  enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: homebridge-192.168.1.38.nip.io
+      paths: 
+        - "/"
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

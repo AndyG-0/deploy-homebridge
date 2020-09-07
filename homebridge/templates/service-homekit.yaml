@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "homebridge.fullname" . }}-homekit
+  labels:
+{{ include "homebridge.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.homekitService.type }}
+  externalTrafficPolicy: {{ .Values.homekitService.externalTrafficPolicy }}
+  loadBalancerIP: {{ .Values.homekitService.loadBalancerIP }}
+  ports:
+    - port: {{ .Values.homekitService.port }}
+      # targetPort: homekit-http
+      protocol: UDP
+      name: homekit-udp
