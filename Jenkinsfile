@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                     echo 'Deploying using helm...'
-                    sh 'export KUBECONFIG=/var/lib/jenkins/config && helm delete && helm upgrade homebridge ./homebridge/ -i -n homebridge -f ./homebridge/values.yaml --recreate-pods'
+                    sh 'export KUBECONFIG=/var/lib/jenkins/config && helm delete && sleep 10 && helm upgrade homebridge ./homebridge/ -i -n homebridge -f ./homebridge/values.yaml --recreate-pods'
             }
         }
     }
