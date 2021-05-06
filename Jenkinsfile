@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     echo 'Copy secrets file ...'
-                    sh 'scp -F /var/lib/jenkins/.ssh/ pi@192.168.1.91:/media/pi/Elements/homebridge-config/config.json ./config.json'
+                    sh 'scp -F /var/lib/jenkins/.ssh/ pi@192.168.1.91:/media/mybook/homebridge-config/config.json ./config.json'
                 }
             }
         }
@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 echo 'Copy code to nfs share ...'
-                sh 'scp -F /var/lib/jenkins/.ssh/  -r ${PWD}/config.json pi@192.168.1.91:/media/pi/Elements/k8sNFS/homebridge/config.json'
+                sh 'scp -F /var/lib/jenkins/.ssh/  -r ${PWD}/config.json pi@192.168.1.91:/media/pi/mybook/k8sNFS/homebridge/config.json'
             }
         }
         stage('Deploy to k3s') {
