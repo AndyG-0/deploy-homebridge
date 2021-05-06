@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 echo 'Copy code to nfs share ...'
-                sh 'scp -F /var/lib/jenkins/.ssh/  -r ${PWD}/config.json pi@192.168.1.142:/media/pi/mybook/k8sNFS/homebridge/config.json'
+                sh 'scp -F /var/lib/jenkins/.ssh/  -r ${PWD}/config.json pi@192.168.1.142:/media/mybook/k8sNFS/homebridge/config.json'
             }
         }
         stage('Deploy to k3s') {
