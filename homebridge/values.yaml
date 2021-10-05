@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: registry-192.168.1.38.nip.io/homebridge
+  repository: oznu/homebridge:latest
   tag: latest
   pullPolicy: Always
 
