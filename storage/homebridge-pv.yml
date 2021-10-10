@@ -12,8 +12,6 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: slow
-  mountOptions:
-    - nfsvers=4.1
   nfs:
-    path: /export/k8sNFS/homebridge/
+    path: /export/k8sNFS/homebridge
     server: 192.168.1.142
