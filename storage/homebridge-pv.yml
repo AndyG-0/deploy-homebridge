@@ -15,5 +15,5 @@ spec:
   mountOptions:
     - nfsvers=4.1
   nfs:
-    path: /media/mybook/k8sNFS/homebridge/
+    path: /export/k8sNFS/homebridge/
     server: 192.168.1.142
