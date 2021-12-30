@@ -20,6 +20,23 @@ pipeline {
                 sh 'scp -F /var/lib/jenkins/.ssh/  -r ${PWD}/config.json pi@192.168.1.142:/srv/dev-disk-by-uuid-0A5DD4543FDF14C4/k8sNFS/homebridge/config.json'
             }
         }
+        stage('Helm Dry Run') {
+            when {
+                expression {
+                    env.BRANCH_NAME != 'master'
+                }
+            }
+            agent {
+                docker {
+                    image 'dtzar/helm-kubectl:latest'
+                    args '-v /var/lib/jenkins/config:/var/lib/jenkins/config'
+                }
+            }
+            steps {
+                    echo 'Deploying using helm...'
+                    sh 'export KUBECONFIG=/var/lib/jenkins/config && helm upgrade --install homebridge ./homebridge/ -i -n homebridge -f ./homebridge/values.yaml --dry-run'
+            }
+        }
         stage('Deploy to k3s') {
             when {
                 expression {
@@ -28,13 +45,13 @@ pipeline {
             }
             agent {
                 docker {
-                    image 'registry-192.168.1.38.nip.io/homeassistant/helm-kubectl:latest'
+                    image 'dtzar/helm-kubectl:latest'
                     args '-v /var/lib/jenkins/config:/var/lib/jenkins/config'
                 }
             }
             steps {
                     echo 'Deploying using helm...'
-                    sh 'export KUBECONFIG=/var/lib/jenkins/config && helm upgrade --install homebridge ./homebridge/ -i -n homebridge -f ./homebridge/values.yaml --recreate-pods'
+                    sh 'export KUBECONFIG=/var/lib/jenkins/config && helm upgrade --install homebridge ./homebridge/ -i -n homebridge -f ./homebridge/values.yaml'
             }
         }
     }
