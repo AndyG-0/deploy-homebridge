@@ -35,7 +35,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: homebridge-192.168.1.91.nip.io
+    - host: homebridge-192.168.1.38.nip.io
       paths: 
         - "/"
 
