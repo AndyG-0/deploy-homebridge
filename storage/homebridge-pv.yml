@@ -13,5 +13,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: slow
   nfs:
-    path: /rootfs_homebridge
+    path: /export/homebridge
     server: 192.168.1.142
